@@ -2,10 +2,10 @@ import { buildFallbackReply, buildSystemPrompt } from "../src/chatKnowledge.js";
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const MODEL_FALLBACKS = [
-  "openrouter/free",
-  "openai/gpt-oss-20b:free",
   "qwen/qwen3-next-80b-a3b-instruct:free",
-  "deepseek/deepseek-v4-flash:free"
+  "deepseek/deepseek-v4-flash:free",
+  "openai/gpt-oss-20b:free",
+  "z-ai/glm-4.5-air:free"
 ];
 
 export default async function handler(request, response) {
@@ -51,7 +51,8 @@ export default async function handler(request, response) {
         "X-Title": "Mediva Care Hospital Prototype"
       },
       body: JSON.stringify({
-        models: MODEL_FALLBACKS,
+        model: MODEL_FALLBACKS[0],
+        models: MODEL_FALLBACKS.slice(1),
         messages: [
           { role: "system", content: buildSystemPrompt(page) },
           ...history
@@ -63,7 +64,7 @@ export default async function handler(request, response) {
           { role: "user", content: userMessage }
         ],
         temperature: 0.45,
-        max_completion_tokens: 420
+        max_tokens: 420
       })
     });
 
@@ -80,7 +81,7 @@ export default async function handler(request, response) {
 
     return response.status(200).json({
       mode: "ai",
-      model: data.model || "openrouter/free",
+      model: data.model || MODEL_FALLBACKS[0],
       reply
     });
   } catch (error) {
