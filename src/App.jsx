@@ -926,7 +926,7 @@ function ChatWidget({ route }) {
                 {message.content}
               </article>
             ))}
-            {loading && <article className="assistant">Thinking, with stored fallback ready...</article>}
+            {loading && <article className="assistant">Thinking...</article>}
           </div>
           <form className="chat-form" onSubmit={submitChat}>
             <input
@@ -938,7 +938,7 @@ function ChatWidget({ route }) {
               <Send size={17} aria-hidden="true" />
             </button>
           </form>
-          <p className="chat-note">AI uses a server-side key when configured. If unavailable, stored project answers reply instead.</p>
+          <p className="chat-note">AI answers use a server-side key. Stored project answers appear only if AI is unavailable.</p>
         </div>
       )}
       <button className="chat-launcher" type="button" onClick={() => setOpen((current) => !current)} aria-expanded={open}>

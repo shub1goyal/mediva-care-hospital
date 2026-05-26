@@ -61,7 +61,7 @@ The production output is generated in `dist/`.
 
 ## Chatbot Behavior
 
-The chat widget explains the Mediva Care prototype, Shubham Goyal, NexaFlow-style delivery, hospital pages, departments, doctors, bookings, emergency guidance, health packages, and insurance flow.
+The chat widget explains the Mediva Care prototype, Shubham Goyal, NexaFlow-style delivery, hospital pages, departments, doctors, bookings, emergency guidance, health packages, and insurance flow. When users ask about hiring or services, it includes the public NexaFlow website: `https://nexaflow-vert.vercel.app/`.
 
 `/api/chat` keeps the OpenRouter key on the server. If the key is missing, OpenRouter is unavailable, a free model is rate-limited, or the API returns an empty answer, the app returns stored fallback responses from `src/chatKnowledge.js`.
 
