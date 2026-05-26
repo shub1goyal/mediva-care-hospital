@@ -830,6 +830,35 @@ function Brief({ icon: Icon, title, text }) {
   );
 }
 
+function ChatMessageContent({ text }) {
+  const matcher = /(https?:\/\/[^\s]+|[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}|\+91[\s-]?\d{5}[\s-]?\d{5})/gi;
+  const parts = String(text).split(matcher).filter(Boolean);
+
+  return parts.map((part, index) => {
+    if (/^https?:\/\//i.test(part)) {
+      const cleanUrl = part.replace(/[.,!?)]$/, "");
+      const suffix = part.slice(cleanUrl.length);
+      return (
+        <span key={`${part}-${index}`}>
+          <a href={cleanUrl} target="_blank" rel="noreferrer">{cleanUrl}</a>
+          {suffix}
+        </span>
+      );
+    }
+
+    if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(part)) {
+      return <a href={`mailto:${part}`} key={`${part}-${index}`}>{part}</a>;
+    }
+
+    if (/^\+91[\s-]?\d{5}[\s-]?\d{5}$/.test(part)) {
+      const digits = part.replace(/\D/g, "");
+      return <a href={`https://wa.me/${digits}`} target="_blank" rel="noreferrer" key={`${part}-${index}`}>{part}</a>;
+    }
+
+    return part;
+  });
+}
+
 function ChatWidget({ route }) {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -923,7 +952,7 @@ function ChatWidget({ route }) {
           <div className="chat-log" aria-live="polite">
             {messages.map((message, index) => (
               <article className={message.role} key={`${message.role}-${index}`}>
-                {message.content}
+                <ChatMessageContent text={message.content} />
               </article>
             ))}
             {loading && <article className="assistant">Thinking...</article>}

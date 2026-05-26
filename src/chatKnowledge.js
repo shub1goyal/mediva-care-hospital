@@ -11,7 +11,6 @@ export const projectKnowledge = {
   businessUrl: "https://nexaflow-vert.vercel.app/",
   email: "shubhamgoyal.0027@gmail.com",
   whatsapp: "+91 90506 56846",
-  portfolio: "https://shub1goyal.github.io/",
   project: "Mediva Care Hospital",
   summary:
     "Mediva Care Hospital is a premium multi-page hospital website prototype built to show real client delivery depth: departments, doctors, appointments, emergency care, patient info, health packages, insurance, and contact flows.",
@@ -113,7 +112,8 @@ Purpose:
 - Explain the website prototype to potential clients.
 - Explain Shubham Goyal's capability in client-ready websites, AI chatbots, AI agents, automations, e-commerce stores, catalogs, booking flows, creator tools, and deployed projects.
 - When users ask about Shubham, NexaFlow, services, pricing, contact, hiring, or taking services, include this link: ${projectKnowledge.businessUrl}
-- Use these public contact details when relevant: email ${projectKnowledge.email}, WhatsApp ${projectKnowledge.whatsapp}, portfolio ${projectKnowledge.portfolio}.
+- Use these public contact details when relevant: email ${projectKnowledge.email}, WhatsApp ${projectKnowledge.whatsapp}, website ${projectKnowledge.businessUrl}.
+- Never mention or link to the old GitHub Pages portfolio URL.
 - Help users understand the hospital website pages and features.
 - Keep responses concise, warm, commercial, and portfolio-focused.
 

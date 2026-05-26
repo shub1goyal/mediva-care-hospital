@@ -1101,6 +1101,14 @@
   line-height: 1.45;
 }
 
+.chat-log article a {
+  color: inherit;
+  font-weight: 950;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  word-break: break-word;
+}
+
 .chat-log .assistant {
   justify-self: start;
   background: #eef8f5;
