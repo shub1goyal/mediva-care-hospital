@@ -831,12 +831,12 @@ function Brief({ icon: Icon, title, text }) {
 }
 
 function ChatMessageContent({ text }) {
-  const matcher = /(https?:\/\/[^\s]+|[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}|\+91[\s-]?\d{5}[\s-]?\d{5})/gi;
+  const matcher = /(https?:\/\/[^\s<>]+|[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}|\+91[\s\u00a0\u202f-]?\d{5}[\s\u00a0\u202f-]?\d{5})/gi;
   const parts = String(text).split(matcher).filter(Boolean);
 
   return parts.map((part, index) => {
     if (/^https?:\/\//i.test(part)) {
-      const cleanUrl = part.replace(/[.,!?)]$/, "");
+      const cleanUrl = part.replace(/[.,!?)>]+$/, "");
       const suffix = part.slice(cleanUrl.length);
       return (
         <span key={`${part}-${index}`}>
@@ -850,7 +850,7 @@ function ChatMessageContent({ text }) {
       return <a href={`mailto:${part}`} key={`${part}-${index}`}>{part}</a>;
     }
 
-    if (/^\+91[\s-]?\d{5}[\s-]?\d{5}$/.test(part)) {
+    if (/^\+91[\s\u00a0\u202f-]?\d{5}[\s\u00a0\u202f-]?\d{5}$/.test(part)) {
       const digits = part.replace(/\D/g, "");
       return <a href={`https://wa.me/${digits}`} target="_blank" rel="noreferrer" key={`${part}-${index}`}>{part}</a>;
     }
